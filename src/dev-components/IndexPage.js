@@ -6,6 +6,8 @@ import _ from "underscore";
 import Index from "../components/Index";
 import tableHasPublishedColumn from "../utils/tableHasPublishedColumn";
 
+const rowsPerPage = parseInt(process.env.ROWS_PER_PAGE || 10, 10)
+
 export default class IndexPage extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +35,7 @@ export default class IndexPage extends React.Component {
         .eachPage(
           function page(records, fetchNextPage) {
             records.forEach(row => {
-              if (currentRow > 10) {
+              if (currentRow > rowsPerPage) {
                 currentRow = 1;
                 allRows.push([]);
               }

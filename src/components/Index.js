@@ -32,7 +32,7 @@ const Index = ({ rows, pagination }) => {
           row.id;
 
         return (
-          <LinkOrAnchor key={row.id} to={`/${slug}.html`}>
+          <LinkOrAnchor key={row.id} to={`#${slug}`}>
             <Row
               fieldsToDisplay={getFieldsToDisplay(
                 process.env.HOMEPAGE_FIELD_ORDER
@@ -46,14 +46,14 @@ const Index = ({ rows, pagination }) => {
         <div>
           {pagination.back ? (
             <LinkOrAnchor className="nav-button" to={pagination.back}>
-              <span>← Previous</span>
+              <span>← Înapoi</span>
             </LinkOrAnchor>
           ) : (
             <div />
           )}
           {pagination.next ? (
             <LinkOrAnchor className="nav-button" to={pagination.next}>
-              <span>Next →</span>
+              <span>Înainte →</span>
             </LinkOrAnchor>
           ) : (
             <div />

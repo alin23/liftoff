@@ -45,7 +45,7 @@ const Row = ({ rowData, fieldsToDisplay }) => {
     return field;
   };
   return (
-    <div className="row">
+    <div className="row" id={rowData.id}>
       {_.chain(fieldsToDisplay)
         .map(mapFields)
         .filter(renderer => !!renderer)

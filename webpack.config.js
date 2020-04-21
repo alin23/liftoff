@@ -60,6 +60,7 @@ module.exports = {
       'PAGE_TITLE_COLUMN',
       'MARKDOWN_FIELDS',
       'SITE_DESCRIPTION',
+      'ROWS_PER_PAGE',
     ]),
   ],
   devServer: {
