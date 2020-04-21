@@ -1,0 +1,115 @@
+@import 'rupture'
+@import 'nib'
+
+rupture.mobile-cutoff = 450px
+rupture.scale = 0 450px 600px 800px 1050px 1800px
+
+$red = #EAA960
+$green = #8EBA40
+
+.field-name
+  display: none
+  visibility: hidden
+
+html
+  color: #141414
+  background-color: #fafafa
+
+body
+  width: 90vw
+  max-width: 90vw
+
+  &::before
+    display: none
+
+  +mobile(orientation: portrait)
+    margin-left: auto
+    margin-right: auto
+
+.index-page
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  flex-wrap: wrap
+
+  +mobile(orientation: portrait)
+    justify-content: center
+
+
+.row-link
+  margin-bottom: 2rem
+  margin-left: 2rem
+  margin-right: 2rem
+
+  +mobile(orientation: portrait)
+    margin-bottom: 3rem
+    margin-left: 0
+    margin-right: 0
+
+  &:last-of-type .row
+    margin-bottom: 0
+
+  .row::after
+    display: none
+
+  ul
+    margin: 0
+
+  img
+    width: 200px
+    height: 200px
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+          0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+          0 12.5px 10px rgba(0, 0, 0, 0.06)
+    border-radius: 8px
+    object-fit: cover
+    margin: 0
+
+.Pret
+  // font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace
+  font-weight: bold
+  font-size: 1rem
+  margin-top: 0
+
+  +mobile(orientation: portrait)
+    text-align center
+
+  +above(2)
+    display inline
+
+    &.Maxim
+      margin-left 0.7ex
+
+  &.Minim
+    color: $red
+
+  &.Maxim
+    color: $green
+
+  & span
+    color: slategray
+
+.Produs
+  font-weight 500
+  font-size 1.1rem
+  +mobile(orientation: portrait)
+    text-align center
+
+.header
+  margin-top: 0
+
+  h1
+    margin-top: 0
+
+  & + h1
+    margin-bottom: 4rem
+    font-size: 1.5rem
+    font-weight: bold
+
+  &, & + h1
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif
+    font-weight: 900
+    flex-grow: 1
+    flex-basis: 100%
+    flex-shrink: 0
+
