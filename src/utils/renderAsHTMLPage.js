@@ -18,6 +18,11 @@ const renderAsHTMLPage = (component, pageTitle) => {
   <body>
     ${renderToStaticMarkup(component)}
     <script>
+      setTimeout(function () {
+        var today = (new Date()).toLocaleDateString("ro-RO", {weekday: "long", day: "numeric", month: "long"});
+        var dateEl = document.getElementById("header-date");
+        dateEl.innerHTML = today;
+      }, 500)
       setInterval(function () {
         var today = (new Date()).toLocaleDateString("ro-RO", {weekday: "long", day: "numeric", month: "long"});
         var dateEl = document.getElementById("header-date");
