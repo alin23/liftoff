@@ -97,7 +97,7 @@ tableHasPublishedColumn(base, includePublished =>
           const filepath = `dist/${slug}.html`;
           allRows[currentPage].push(formattedRow);
           recordsOnCurrentPage += 1;
-          if (recordsOnCurrentPage >= 10) {
+          if (recordsOnCurrentPage >= process.env.ROWS_PER_PAGE) {
             recordsOnCurrentPage = 0;
             currentPage += 1;
           }
