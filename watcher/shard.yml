@@ -1,0 +1,10 @@
+name: watcher
+version: 0.1.0
+
+targets:
+  watcher:
+    main: src/watcher.cr
+
+dependencies:
+  airtable:
+    github: mang/airtable

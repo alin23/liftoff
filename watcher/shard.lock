@@ -1,0 +1,10 @@
+version: 1.0
+shards:
+  airtable:
+    github: mang/airtable
+    commit: 7f0d995bed64c1ca24328cb8c6ffd2cecba570e0
+
+  cache_hash:
+    github: samueleaton/cache-hash
+    version: 0.1.1
+
