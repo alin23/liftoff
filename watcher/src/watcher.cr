@@ -5,7 +5,13 @@ Airtable.config.api_key = ENV["AIRTABLE_API_KEY"]
 Airtable.config.base_name = ENV["AIRTABLE_BASE_NAME"]
 # Airtable.config.debug = "true"
 
-BUILD_HOOK  = ENV["NETLIFY_BUILD_HOOK"]
+BUILD_HOOK = ENV.fetch("NETLIFY_BUILD_HOOK", "")
+SITE_DIR   = ENV.fetch("SITE_DIR", "")
+if BUILD_HOOK.empty? && SITE_DIR.empty?
+  puts "Need at least one of (NETLIFY_BUILD_HOOK, SITE_DIR)"
+  exit 1
+end
+
 POLLING     = ENV.fetch("AIRTABLE_POLLING_SECONDS", "20").to_i
 DEPLOY_WAIT = ENV.fetch("AIRTABLE_DEPLOY_WAIT", "60").to_i
 
@@ -32,6 +38,21 @@ end
 deploy_channel = Channel(Nil).new
 deploy_fiber : Fiber? = nil
 
+def deploy_local
+  puts `cd #{SITE_DIR} && yarn build`
+end
+
+def deploy_netlify
+  resp = HTTP::Client.post(BUILD_HOOK, body: "{}")
+  if resp.status == HTTP::Status::OK
+    puts "Deployed successfully!\n"
+  else
+    puts "Deployment error!"
+    puts resp.body
+    puts "\n"
+  end
+end
+
 def deploy(ch)
   loop do
     puts "Deploying in #{DEPLOY_WAIT} seconds..."
@@ -45,13 +66,10 @@ def deploy(ch)
   end
 
   puts "Deploying..."
-  resp = HTTP::Client.post(BUILD_HOOK, body: "{}")
-  if resp.status == HTTP::Status::OK
-    puts "Deployed successfully!\n"
+  if !SITE_DIR.empty?
+    deploy_local
   else
-    puts "Deployment error!"
-    puts resp.body
-    puts "\n"
+    deploy_netlify
   end
 end
 
@@ -64,12 +82,17 @@ last_produse = Produs.list(
 
 while true
   sleep POLLING.seconds
-  produse = Produs.list(
-    filterByFormula: "{Published}",
-    view: "Main View",
-    maxRecords: 100,
-    source: :backend
-  )
+  begin
+    produse = Produs.list(
+      filterByFormula: "{Published}",
+      view: "Main View",
+      maxRecords: 100,
+      source: :backend
+    )
+  rescue ex
+    puts "Error fetching products:", ex.message
+    next
+  end
 
   if produse != last_produse
     last_produse = produse

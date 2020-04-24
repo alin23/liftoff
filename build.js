@@ -48,6 +48,7 @@ const downloadFile = (url, filepath, onSuccess, onError) => {
 const alreadySeenSlugs = {};
 
 const alreadyDownloadedAttachments = {};
+const rowsPerPage = parseInt(process.env.ROWS_PER_PAGE || 10, 10)
 
 let currentPage = 0;
 let recordsOnCurrentPage = 0;
@@ -97,7 +98,7 @@ tableHasPublishedColumn(base, includePublished =>
           const filepath = `dist/${slug}.html`;
           allRows[currentPage].push(formattedRow);
           recordsOnCurrentPage += 1;
-          if (recordsOnCurrentPage >= process.env.ROWS_PER_PAGE) {
+          if (recordsOnCurrentPage >= rowsPerPage) {
             recordsOnCurrentPage = 0;
             currentPage += 1;
           }

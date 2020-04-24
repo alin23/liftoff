@@ -60,8 +60,12 @@ module Airtable
         end
       end
 
-      json = channel.receive
-      return json
+      select
+      when json = channel.receive
+        return json
+      when timeout(10.seconds)
+        raise IO::TimeoutError.new("Timed out while listing table #{table}")
+      end
     end
 
     def self.show(table : String, id : String, source : DataSource = :cache)
@@ -97,7 +101,12 @@ module Airtable
         end
       end
 
-      return channel.receive
+      select
+      when json = channel.receive
+        return json
+      when timeout(10.seconds)
+        raise IO::TimeoutError.new("Timed out while showing #{id} from table #{table}")
+      end
     end
 
     def self.create(table : String, data : String)

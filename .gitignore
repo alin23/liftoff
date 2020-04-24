@@ -4,3 +4,7 @@ dist
 yarn-error.log
 .DS_Store
 custom/styles.css
+*.dwarf
+*.o
+zig-cache/
+bin/
