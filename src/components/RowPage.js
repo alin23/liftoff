@@ -12,7 +12,7 @@ const RowPage = ({ rowData }) => (
       <Header title={process.env.HEADER_TITLE} />
     )}
     <LinkOrAnchor className="nav-button" to="/">
-      Înapoi
+      {process.env.BACK_TEXT || "Back"}
     </LinkOrAnchor>
 
     <Row
@@ -20,7 +20,7 @@ const RowPage = ({ rowData }) => (
       rowData={rowData}
     />
     <LinkOrAnchor className="nav-button" to="/">
-      Înapoi
+      {process.env.BACK_TEXT || "Back"}
     </LinkOrAnchor>
   </div>
 );

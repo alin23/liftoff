@@ -46,14 +46,14 @@ const Index = ({ rows, pagination }) => {
         <div>
           {pagination.back ? (
             <LinkOrAnchor className="nav-button" to={pagination.back}>
-              <span>← Înapoi</span>
+              <span>← {process.env.PREVIOUS_TEXT || "Previous"}</span>
             </LinkOrAnchor>
           ) : (
             <div />
           )}
           {pagination.next ? (
             <LinkOrAnchor className="nav-button" to={pagination.next}>
-              <span>Înainte →</span>
+              <span>{process.env.NEXT_TEXT || "Next"} →</span>
             </LinkOrAnchor>
           ) : (
             <div />

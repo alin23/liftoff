@@ -141,16 +141,19 @@ tableHasPublishedColumn(base, includePublished =>
         allRows.forEach((row, idx) => {
           const pageFilepath = `dist/page/${idx + 1}.html`;
           const indexFilepath = `dist/index.html`;
-          const pagination = {
-            back: idx > 0 ? `/page/${idx}.html` : null,
-            next: idx < allRows.length - 1 ? `/page/${idx + 2}.html` : null
-          };
+          var pagination = null;
+          if (!process.env.PAGINATION_DISABLED) {
+            pagination = {
+              back: idx > 0 ? `/page/${idx}.html` : null,
+              next: idx < allRows.length - 1 ? `/page/${idx + 2}.html` : null
+            }
+          }
           if (idx === 0) {
             // write index page at /
-            writeFile(idx, indexFilepath, false);
+            writeFile(idx, indexFilepath, pagination);
           }
           // write page files for pagination
-          writeFile(idx, pageFilepath, false);
+          writeFile(idx, pageFilepath, pagination);
         });
       }
     )

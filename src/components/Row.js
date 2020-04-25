@@ -6,12 +6,12 @@ import TextField from "./TextField";
 import Attachments from "./Attachments";
 import * as customRenderers from "../../custom/renderers";
 
-const getRenderer = field => {
+const getRenderer = (field, row) => {
   const { value, name } = field;
   const customRendererName = name.replace(/\s/g, "");
   if (customRenderers[customRendererName]) {
     const Component = customRenderers[customRendererName];
-    return <Component key={name} name={name} value={value} />;
+    return <Component key={name} name={name} value={value} row={row} />;
   }
 
   if (typeof value === "string" || typeof value === "number") {
@@ -40,7 +40,7 @@ const getRenderer = field => {
 const Row = ({ rowData, fieldsToDisplay }) => {
   const mapFields = name => {
     const field = rowData.fields.find(field => field.name === name);
-    if (field) return getRenderer(field);
+    if (field) return getRenderer(field, rowData);
 
     return field;
   };

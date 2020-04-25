@@ -4,7 +4,8 @@
 rupture.mobile-cutoff = 450px
 rupture.scale = 0 450px 600px 800px 1050px 1800px
 
-$red = #EAA960
+$red = #EA6065
+$yellow = #EAA960
 $green = #8EBA40
 
 $mono = Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace
@@ -61,12 +62,21 @@ body
   .Imagine
     margin 0
 
+    &.indisponibil
+      filter: saturate(0.3)
+
   img
     margin: 0
     margin-top 2rem
     width 300px
     height: 300px
     object-fit: cover
+
+
+.Imagine
+  filter: brightness(0.9)
+  &.indisponibil
+    filter: saturate(0.4) brightness(0.5)
 
 .index-page
   display: flex
@@ -138,10 +148,13 @@ body
       margin-left 0.7ex
 
   &.Minim
-    color: $red
+    color: $yellow
 
   &.Maxim
     color: $green
+
+  &.indisponibil
+    color: $red
 
   & span
     color: slategray
@@ -153,14 +166,19 @@ body
     text-align center
 
 .Nota
-  font-weight 600
+  font-weight 500
   font-size 0.9rem
-  color #6b6b6b
+  color #626262
+  background aliceblue
+
   +mobile(orientation: portrait)
     text-align center
   p
     margin: 0
     max-width: $productSize
+    padding 3px 6px
+    box-sizing: border-box
+    border-radius 3px
 
     +mobile(orientation: portrait)
       max-width: $mobileProductSize

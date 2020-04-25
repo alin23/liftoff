@@ -28,6 +28,17 @@ module.exports = {
     rules: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
+        test: /\.coffee?$/,
+        exclude: /node_modules/,
+        use: [
+            "babel-loader",
+            {
+                loader: 'coffee-loader',
+                options: {}
+            }
+        ]
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
@@ -61,6 +72,10 @@ module.exports = {
       'MARKDOWN_FIELDS',
       'SITE_DESCRIPTION',
       'ROWS_PER_PAGE',
+      'PAGINATION_DISABLED',
+      'BACK_TEXT',
+      'PREVIOUS_TEXT',
+      'NEXT_TEXT',
     ]),
   ],
   devServer: {
