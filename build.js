@@ -147,10 +147,10 @@ tableHasPublishedColumn(base, includePublished =>
           };
           if (idx === 0) {
             // write index page at /
-            writeFile(idx, indexFilepath, pagination);
+            writeFile(idx, indexFilepath, false);
           }
           // write page files for pagination
-          writeFile(idx, pageFilepath, pagination);
+          writeFile(idx, pageFilepath, false);
         });
       }
     )

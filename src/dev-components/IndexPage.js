@@ -110,7 +110,7 @@ export default class IndexPage extends React.Component {
 
     return rows ? (
       <div>
-        <Index rows={rows[currentPage - 1]} pagination={pagination} />
+        <Index rows={rows[currentPage - 1]} pagination={null} />
       </div>
     ) : (
       <div />

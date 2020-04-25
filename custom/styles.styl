@@ -13,6 +13,8 @@ $serif = Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Se
 $leftMargin = 1.5rem
 $horizontalMargin = 1.5rem
 $productSize = 200px
+$tabletProductSize = 150px
+$mobileProductSize = 120px
 
 .field-name
   display: none
@@ -108,12 +110,12 @@ body
     margin: 0
 
     +mobile(orientation: portrait)
-      width: 120px
-      height: 120px
+      width: $mobileProductSize
+      height: $mobileProductSize
 
     +tablet(orientation: portrait)
-      width: 150px
-      height: 150px
+      width: $tabletProductSize
+      height: $tabletProductSize
 
   .row
     +mobile(orientation: portrait)
@@ -151,12 +153,20 @@ body
     text-align center
 
 .Nota
-  font-weight 500
+  font-weight 600
   font-size 0.9rem
-  color darkseagreen
+  color #6b6b6b
+  +mobile(orientation: portrait)
+    text-align center
   p
     margin: 0
     max-width: $productSize
+
+    +mobile(orientation: portrait)
+      max-width: $mobileProductSize
+    +tablet(orientation: portrait)
+      max-width: $tabletProductSize
+
 
 .header
   margin-top: 0
