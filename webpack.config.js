@@ -17,6 +17,9 @@ const htmlPlugin = new HtmlWebPackPlugin({
 })
 
 module.exports = {
+  resolve: {
+    extensions: ['.wasm', '.mjs', '.js', '.json', '.coffee']
+  },
   output: {
     publicPath: '/',
     filename: 'bundle.js',
@@ -83,5 +86,8 @@ module.exports = {
     historyApiFallback: {
       disableDotRule: true,
     },
+    watchOptions: {
+      ignored: /node_modules/
+    }
   },
 }
