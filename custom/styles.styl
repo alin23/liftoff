@@ -16,6 +16,7 @@ $horizontalMargin = 1.5rem
 $productSize = 200px
 $tabletProductSize = 150px
 $mobileProductSize = 120px
+$smallMobileProductSize = 100px
 
 .field-name
   display: none
@@ -119,6 +120,10 @@ body
     object-fit: cover
     margin: 0
 
+    +to-width(1)
+      width: $smallMobileProductSize
+      height: $smallMobileProductSize
+
     +mobile(orientation: portrait)
       width: $mobileProductSize
       height: $mobileProductSize
@@ -180,6 +185,8 @@ body
     box-sizing: border-box
     border-radius 3px
 
+    +to-width(1)
+      width: $smallMobileProductSize
     +mobile(orientation: portrait)
       max-width: $mobileProductSize
     +tablet(orientation: portrait)
