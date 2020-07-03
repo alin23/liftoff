@@ -1,5 +1,7 @@
 require "airtable"
+require "json"
 require "http/client"
+require "file_utils"
 
 Airtable.config.api_key = ENV["AIRTABLE_API_KEY"]
 Airtable.config.base_name = ENV["AIRTABLE_BASE_NAME"]
@@ -15,16 +17,27 @@ end
 POLLING     = ENV.fetch("AIRTABLE_POLLING_SECONDS", "20").to_i
 DEPLOY_WAIT = ENV.fetch("AIRTABLE_DEPLOY_WAIT", "60").to_i
 
+DATA_DIR = Path["~/.legumematca"].expand(home: true)
+FileUtils.mkdir_p(DATA_DIR.to_s, 777)
+
 class Produs < Airtable::Model
+  include JSON::Serializable
   def_wrappers("Preturi")
 
-  JSON.mapping(
-    produs: {type: String?, key: "Produs"},
-    nota: {type: String?, key: "Nota"},
-    pret_minim: {type: Float64?, key: "Pret Minim"},
-    pret_maxim: {type: Float64?, key: "Pret Maxim"},
-    imagine: {type: Array(Airtable::Image)?, key: "Imagine"}
-  )
+  @[JSON::Field(key: "Produs")]
+  produs : String?
+
+  @[JSON::Field(key: "Nota")]
+  nota : String?
+
+  @[JSON::Field(key: "Pret Minim")]
+  pret_minim : Float64?
+
+  @[JSON::Field(key: "Pret Maxim")]
+  pret_maxim : Float64?
+
+  @[JSON::Field(key: "Imagine")]
+  imagine : Array(Airtable::Image)?
 
   def ==(other)
     @pret_minim == other.pret_minim &&
@@ -103,6 +116,8 @@ while true
       deploy_channel.send(nil)
     end
 
+    data_file = DATA_DIR / "#{Time.local.to_rfc3339}.json"
+    File.write(data_file, produse.to_json)
     next
   end
 
