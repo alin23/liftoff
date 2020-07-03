@@ -120,9 +120,6 @@ body
     object-fit: cover
     margin: 0
 
-    +to-width(400px, orientation: portrait)
-      width: $smallMobileProductSize
-      height: $smallMobileProductSize
 
     +mobile(orientation: portrait)
       width: $mobileProductSize
@@ -131,6 +128,10 @@ body
     +tablet(orientation: portrait)
       width: $tabletProductSize
       height: $tabletProductSize
+
+    +to-width(400px, orientation: portrait)
+      width: $smallMobileProductSize
+      height: $smallMobileProductSize
 
   .row
     +mobile(orientation: portrait)
@@ -185,12 +186,12 @@ body
     box-sizing: border-box
     border-radius 3px
 
-    +to-width(400px, orientation: portrait)
-      width: $smallMobileProductSize
     +mobile(orientation: portrait)
       max-width: $mobileProductSize
     +tablet(orientation: portrait)
       max-width: $tabletProductSize
+    +to-width(400px, orientation: portrait)
+      width: $smallMobileProductSize
 
 
 .header
