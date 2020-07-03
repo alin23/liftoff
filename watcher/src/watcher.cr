@@ -18,26 +18,29 @@ POLLING     = ENV.fetch("AIRTABLE_POLLING_SECONDS", "20").to_i
 DEPLOY_WAIT = ENV.fetch("AIRTABLE_DEPLOY_WAIT", "60").to_i
 
 DATA_DIR = Path["~/.legumematca"].expand(home: true)
-FileUtils.mkdir_p(DATA_DIR.to_s, 777)
+if !Dir.exists? DATA_DIR
+  puts "Creating #{DATA_DIR}"
+  FileUtils.mkdir_p(DATA_DIR.to_s, 777)
+end
 
 class Produs < Airtable::Model
   include JSON::Serializable
   def_wrappers("Preturi")
 
   @[JSON::Field(key: "Produs")]
-  produs : String?
+  property produs : String?
 
   @[JSON::Field(key: "Nota")]
-  nota : String?
+  property nota : String?
 
   @[JSON::Field(key: "Pret Minim")]
-  pret_minim : Float64?
+  property pret_minim : Float64?
 
   @[JSON::Field(key: "Pret Maxim")]
-  pret_maxim : Float64?
+  property pret_maxim : Float64?
 
   @[JSON::Field(key: "Imagine")]
-  imagine : Array(Airtable::Image)?
+  property imagine : Array(Airtable::Image)?
 
   def ==(other)
     @pret_minim == other.pret_minim &&
